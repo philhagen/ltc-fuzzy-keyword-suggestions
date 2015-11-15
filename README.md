@@ -3,7 +3,7 @@ Fuzzy Keyword Suggestions for YOURLS
 
 This is a plugin for the [YOURLS](http://yourls.org) link shortener that handles typos and other "near-misses" for any shortened link.  It is helpful when conveying shortlinks via printed or otherwise non-clickable media.
 
-Manually typing shortened ULRs often leads to a "1" being confused for an "l", "0" for "O", etc.  This plugin will intercept any non-existent keyword request and find "close" matches in the database using the [Levenshtein string similarity](https://en.wikipedia.org/wiki/Levenshtein_distance) algorithm.  This plugin can also handle requests for the root URL of your YOURLS installation, using the same display template as above.
+Manually typing shortened URLs often leads to a "1" being confused for an "l", "0" for "O", etc.  This plugin will intercept any non-existent keyword request and find "close" matches in the database using the [Levenshtein string similarity](https://en.wikipedia.org/wiki/Levenshtein_distance) algorithm.  This plugin can also handle requests for the root URL of your YOURLS installation, using the same display template as above.
 
 ## Installation
 1. Install YOURLS on your server
