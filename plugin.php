@@ -66,10 +66,12 @@ function ltc_fuzzy_suggest($ltc_request) {
         }
     }
 
-    $default_template_file = yourls_plugin_url(dirname( __FILE__ ) . '/template-default.php');
-    $custom_template_file = yourls_plugin_url(dirname( __FILE__ ) . '/template.php');
+    $default_template_file = dirname( __FILE__ ) . '/template-default.php';
+    $custom_template_file = dirname( __FILE__ ) . '/template.php';
+
     if (file_exists($custom_template_file)) {
         require($custom_template_file);
+
     } else {
         require($default_template_file);
     }
