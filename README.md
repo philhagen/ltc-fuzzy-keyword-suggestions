@@ -7,17 +7,18 @@ Manually typing shortened ULRs often leads to a "1" being confused for an "l", "
 
 ## Installation
 1. Install YOURLS on your server
-1. Install/create a LEVENSHTEIN() function to your MySQL server (See "MySQL Options", below.)
+1. Install/create a ``LEVENSHTEIN()`` function to your MySQL server (See "MySQL Options", below.)
 1. Download the code from this repository
 1. Place the code into the ``user/plugins/ltc-ltc-fuzzy-keyword-suggestions/`` directory
 1. Log into the YOURLS administration page and activate the plugin
+1. Optionally customize the results page using the included default template
 
 ## MySQL Options
-MySQL does not natively provide a LEVENSHTEIN() function, but you have several options to provide it.
+MySQL does not natively provide a ``LEVENSHTEIN()`` function, but you have several options to provide it.
 
 1. Install a User-Defined Function (UDF) module.  This has a 500-1000x performance benefit over the second option, in my testing - but it does require administrative access to your database server host.  The [Levenshtein-MySQL-UDF](https://github.com/jmcejuela/Levenshtein-MySQL-UDF) project on GitHub worked perfectly on a MySQL 5 server in my testing.
-1. Create a database-level function.  This only requires CREATE ROUTINE privileges to your YOURLS MySQL database, but it is much slower.  This repository includes a ``mysql_levenshtein_function.sql`` file that may help, and [this Stack Overflow thread](http://stackoverflow.com/questions/12617348/mysql-levenshtein) may also be of assistance.
-Note that the plugin will NOT activate if you do not have an available MySQL function named LEVENSHTEIN().
+1. Create a database-level function.  This only requires ``CREATE ROUTINE`` privileges to your YOURLS MySQL database, but it is much slower.  This repository includes a ``mysql_levenshtein_function.sql`` file that may help, and [this Stack Overflow thread](http://stackoverflow.com/questions/12617348/mysql-levenshtein) may also be of assistance.
+Note that the plugin will NOT activate if you do not have an available MySQL function named ``LEVENSHTEIN()``.
 
 ## Usage and Customization
 No special usage instructions are required - the plugin should work right "out of the box".  However, you may want to take a few steps to optimize and polish the experience.
