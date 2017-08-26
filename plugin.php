@@ -3,7 +3,7 @@
 Plugin Name: Fuzzy Keyword Suggestions
 Plugin URI: https://github.com/philhagen/ltc-fuzzy-keyword-suggestions
 Description: This plugin performs a levenshtein string lookup for any short url which does not appear in the database, then presents a list of possible matches
-Version: 1.0.1
+Version: 1.0.2
 Author: Phil Hagen
 Author URI: http://lewestech.com
 */
@@ -58,7 +58,7 @@ function ltc_fuzzy_keyword_suggestions_setup() {
         $levenshtein_test_pass = FALSE;
     } else {
         $lev_test_dist = $query[0]->lev_dist;
-        if ($lev_test_dist == 5) {
+        if ($lev_test_dist == 1) {
             $levenshtein_test_pass = TRUE;
         } else {
             $levenshtein_test_pass = FALSE;
