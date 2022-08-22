@@ -3,7 +3,7 @@
 Plugin Name: Fuzzy Keyword Suggestions
 Plugin URI: https://github.com/philhagen/ltc-fuzzy-keyword-suggestions
 Description: This plugin performs a levenshtein string lookup for any short url which does not appear in the database, then presents a list of possible matches
-Version: 1.0.2
+Version: 1.1
 Author: Phil Hagen
 Author URI: http://lewestech.com
 */
@@ -27,7 +27,10 @@ function ltc_fuzzy_suggest($ltc_request) {
 
         $ltc_keyword = yourls_sanitize_keyword($ltc_request[0]);
 
-        $query = $ydb->get_results("SELECT keyword, url, title, LEVENSHTEIN('$ltc_keyword', keyword) AS `lev_dist` FROM `$table_url` HAVING `lev_dist` < 3 ORDER BY `lev_dist` DESC");
+        $sql = "SELECT keyword, url, title, LEVENSHTEIN(:keyword, keyword) AS `lev_dist` FROM `$table_url` HAVING `lev_dist` < 3 ORDER BY `lev_dist` DESC";
+        $binds = array('keyword' => $ltc_keyword);
+        $query = $ydb->fetchObjects($sql, $binds);
+
         if ($query) {
             $suggested_results = TRUE;
 
@@ -53,7 +56,10 @@ function ltc_fuzzy_suggest($ltc_request) {
 yourls_add_action( 'activated_'.yourls_plugin_basename( __FILE__ ), 'ltc_fuzzy_keyword_suggestions_setup' );
 function ltc_fuzzy_keyword_suggestions_setup() {
     global $ydb;
-    $query = $ydb->get_results("SELECT LEVENSHTEIN('teststring1', 'teststring2') AS lev_dist");
+    $sql = "SELECT LEVENSHTEIN('teststring1', 'teststring2') AS lev_dist";
+    $binds = array();
+    $query = $ydb->fetchValue($sql, $binds);
+
     if (!$query) {
         $levenshtein_test_pass = FALSE;
     } else {
